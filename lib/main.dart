@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'transaction.dart';
 
@@ -20,7 +21,7 @@ class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
         id: '1', title: 'Chocolate', amount: 10.5, date: DateTime.now()),
-    Transaction(id: '2', title: 'Chips', amount: 5, date: DateTime.now()),
+    Transaction(id: '2', title: 'Chips', amount: 5.02, date: DateTime.now()),
   ];
 
   @override
@@ -47,13 +48,32 @@ class MyHomePage extends StatelessWidget {
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 2)),
-                      child: Text(e.amount.toString()),
+                        border: Border.all(
+                            width: 2,
+                            style: BorderStyle.solid,
+                            color: Colors.purple),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      child: Text(
+                        '\$ ${e.amount.toString()}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.purple),
+                      ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(e.title),
-                        Text(e.date.hour.toString())
+                        Text(
+                          e.title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        Text(DateFormat().add_yMMMMd().format(e.date),
+                            style: TextStyle(color: Colors.grey, fontSize: 13))
                       ],
                     )
                   ],
